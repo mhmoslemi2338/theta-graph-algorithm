@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import math
 import numpy as np
 import cv2 as cv
-from mouse_pos import mouse_pos
 
+import get_position
 pi=math.pi
 x=768
 y=576
@@ -31,11 +31,10 @@ def valid(p1,p2,i,k):
 
 
 
-
-n = int(input("Enter number of dots: ") )
 k = int(input("Enter k between five and fifteen: ") )
     
-clk=mouse_pos(n,x,y)
+clk=get_position.mouse_pos()
+n=len(clk)
 
 img = np.zeros([y,x,3],dtype=np.uint8)
 img.fill(255)
@@ -53,12 +52,14 @@ for pnt in clk:
         c=m*pnt[1][0]-(pnt[1][1])
         lines.append([pnt[0],a,b,c])
         
-i=0
+
 graph=[]
-for pnt in clk:
-    distance=[]
+
+
+for pnt in clk:   
     i=0
     for line in lines:
+        distance=[]
         if line[0]==pnt[0]:
             i+=1
             for row in clk:
@@ -68,9 +69,14 @@ for pnt in clk:
                         distance.append([pnt[0],row[0],d])
             distance.sort(key=lambda s:s[2])          
             try:
-                graph.append([distance[0][0],distance[0][1]])
+                graph.append([distance[0][0],distance[0][1]])   
             except:
                 pass
+            
+
+
+
+            
 
 for row in graph:
     for pnt in clk:
