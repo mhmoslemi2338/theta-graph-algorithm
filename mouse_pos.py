@@ -14,9 +14,11 @@ def mouse_pos(k,x=768,y=576):
             if i==k:
                 done=True
             elif event.type == pg.MOUSEBUTTONDOWN:
-                clicks.append(event.pos)
                 i+=1
+                clicks.append([i,event.pos])
+                
         screen.fill((30, 30, 30))
         pg.display.flip()
     pg.quit()
     return clicks
+
